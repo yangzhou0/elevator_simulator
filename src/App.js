@@ -6,13 +6,29 @@ function App() {
   // initialize a random floow between 1 and 10
   const [currentFloor,setCurrentFloor] = useState(getRandomIntInclusive(1,10))
   const [floorsToGo,setFloorsToGo] = useState([])
+  const [closeDoor,setCloseDoor] = useState(false)
+  const [goingUp,setGoingUp] = useState(true)
+
   const floors = Array(10).fill(null).map((_, i) => i+1);
   const selectFloor = (e)=>{
     let selectedFloor = e.target.value
-    addFloor(floorsToGo,selectedFloor)
+    addFloor(floorsToGo,selectedFloor,setFloorsToGo)
     console.log(floorsToGo)
-    setFloorsToGo(floorsToGo)
   }
+
+  // useEffect(() => {
+  //   let elevatorMoving = setTimeout(
+  //     ()=>{setCurrentFloor(goingUp? 
+  //       setCurrentFloor(currentFloor+1) : setCurrentFloor(currentFloor-1))}
+  //       , 1000);
+
+  //   //clean up    
+  //   return () => {
+  //     clearTimeout(elevatorMoving)
+  //   }
+  // }, [closeDoor])
+
+
   return (
     <div className="App">
       <h2>current floor: {currentFloor}</h2>
@@ -21,6 +37,7 @@ function App() {
       {floors.map((floor)=>(
         <button onClick={selectFloor} value ={floor}>{floor}</button>
       ))}
+      <button onClick={(e)=>{setCloseDoor(true)}}>close elevator door</button>
     </div>
   );
 }
