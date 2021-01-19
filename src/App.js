@@ -27,12 +27,13 @@ function App() {
         break;
       case 'stop':
         console.log('no more floors to go');
+        setCloseDoor(false)
         break;
     }
 
     //set time interval for elevator to move
     let interval;
-    if (closeDoor){
+    if (closeDoor && floorsToGo.length != 0 ){
       isGoingUp(currentFloor,floorsToGo)? setGoingUp(true) : setGoingUp(false)
       interval = setInterval(() => {
         setCurrentFloor(goingUp? currentFloor+1 : currentFloor-1)
@@ -42,7 +43,7 @@ function App() {
       clearInterval(interval);
     }
     return () => clearInterval(interval);
-  }, [closeDoor,currentFloor,floorsToGo,goingUp]);
+  }, [closeDoor,currentFloor,goingUp]);
 
 
   return (

@@ -13,7 +13,7 @@ const addFloor = (floorsToGo,selectedFloor,setFloorsToGo)=>{
 }
 
 const isGoingUp = (currentFloor,floorsToGo)=>{
-  if (floorsToGo[0] > currentFloor){
+  if (floorsToGo[0] >= currentFloor){
     return true
   }
   return false
