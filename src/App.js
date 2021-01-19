@@ -1,27 +1,35 @@
 import logo from './logo.svg';
 import './App.css';
 import {useEffect,useState} from 'react'
-import {getRandomIntInclusive,addFloor} from "./helper/utilityFunctions"
+import {getRandomIntInclusive,addFloor,isGoingUp} from "./helper/utilityFunctions"
+
 function App() {
   // initialize a random floow between 1 and 10
-  const [currentFloor,setCurrentFloor] = useState(getRandomIntInclusive(1,10))
+  const [currentFloor,setCurrentFloor] = useState(0)
   const [floorsToGo,setFloorsToGo] = useState([])
   const [closeDoor,setCloseDoor] = useState(false)
   const [goingUp,setGoingUp] = useState(true)
 
   const floors = Array(10).fill(null).map((_, i) => i+1);
   const selectFloor = (e)=>{
-    let selectedFloor = e.target.value
+    let selectedFloor = Number(e.target.value)
     addFloor(floorsToGo,selectedFloor,setFloorsToGo)
     console.log(floorsToGo)
   }
 
   useEffect(() => {
-    let elevatorMoving = setInterval(
-      ()=>{setCurrentFloor(goingUp? 
-        (currentFloor+1) : (currentFloor-1))}
-        , 1000);
-  }, [closeDoor])
+    let interval;
+    if (closeDoor){
+      isGoingUp(currentFloor,floorsToGo)? setGoingUp(true) : setGoingUp(false)
+      interval = setInterval(() => {
+        setCurrentFloor(goingUp? currentFloor+1 : currentFloor-1)
+      }, 1000);
+    }
+    else{
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [closeDoor,currentFloor,floorsToGo,goingUp]);
 
 
   return (

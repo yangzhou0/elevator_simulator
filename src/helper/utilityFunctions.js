@@ -7,11 +7,20 @@ function getRandomIntInclusive(min, max) {
 const addFloor = (floorsToGo,selectedFloor,setFloorsToGo)=>{
   if (!floorsToGo.includes(selectedFloor)){
     floorsToGo.push(selectedFloor)
+    console.log('new floors to go',floorsToGo)
     setFloorsToGo(floorsToGo)
   }
 }
 
+const isGoingUp = (currentFloor,floorsToGo)=>{
+  if (floorsToGo[0] > currentFloor){
+    return true
+  }
+  return false
+}
+
 export {
   getRandomIntInclusive,
-  addFloor
+  addFloor,
+  isGoingUp
 }
