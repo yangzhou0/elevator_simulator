@@ -24,11 +24,16 @@ function App() {
       case 'arrived':
         console.log(`arrived at ${currentFloor}`);
         setFloorsToGo(floorsToGo.slice(1))
+        setCloseDoor(false)
+        let userInput = prompt('would you like to go out? y/n')
+        if (userInput=='y'){
+          setCloseDoor(true)
+        }
         break;
       case 'stop':
         console.log('no more floors to go');
         setCloseDoor(false)
-        break;
+        return
     }
 
     //set time interval for elevator to move
