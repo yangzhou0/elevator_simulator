@@ -4,8 +4,11 @@ function getRandomIntInclusive(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
 }
 
-const addFloor = (floorsToGo,selectedFloor,setFloorsToGo)=>{
-  if (!floorsToGo.includes(selectedFloor)){
+const addFloor = (currentFloor,floorsToGo,selectedFloor,setFloorsToGo)=>{
+  if (currentFloor == selectedFloor){
+    alert(`You are already at floor ${currentFloor}`)
+  }
+  else if (!floorsToGo.includes(selectedFloor)){
     floorsToGo.push(selectedFloor)
     console.log('new floors to go',floorsToGo)
     setFloorsToGo(floorsToGo)

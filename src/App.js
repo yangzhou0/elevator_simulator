@@ -13,28 +13,12 @@ function App() {
   const floors = Array(10).fill(null).map((_, i) => i+1);
   const selectFloor = (e)=>{
     let selectedFloor = Number(e.target.value)
-    addFloor(floorsToGo,selectedFloor,setFloorsToGo)
+    addFloor(currentFloor,floorsToGo,selectedFloor,setFloorsToGo)
     console.log(floorsToGo)
   }
 
   useEffect(() => {
-    //check what floor it is on and the corresponding status
-    let floorStatus = checkFloorStatus(currentFloor,floorsToGo)
-    switch (floorStatus) {
-      case 'arrived':
-        console.log(`arrived at ${currentFloor}`);
-        setFloorsToGo(floorsToGo.slice(1))
-        setCloseDoor(false)
-        let userInput = prompt('would you like to go out? y/n')
-        if (userInput=='y'){
-          setCloseDoor(true)
-        }
-        break;
-      case 'stop':
-        console.log('no more floors to go');
-        setCloseDoor(false)
-        return
-    }
+
 
     //set time interval for elevator to move
     let interval;
@@ -47,18 +31,38 @@ function App() {
     else{
       clearInterval(interval);
     }
+
+    //check what floor it is on and the corresponding status
+    let floorStatus = checkFloorStatus(currentFloor,floorsToGo)
+    switch (floorStatus) {
+      case 'arrived':
+        setFloorsToGo(floorsToGo.slice(1))
+        setCloseDoor(false)
+        let userInput = prompt(`You have arrived at floor ${currentFloor} would you like to go out? y/n`)
+        alert('door closing in 3 seconds')
+        setTimeout(() => {
+          setCloseDoor(true)
+        }, 3000);
+        break;
+      case 'stop':
+        setCloseDoor(false)
+        return
+    }
     return () => clearInterval(interval);
-  }, [closeDoor,currentFloor,goingUp]);
+  }, [floorsToGo,closeDoor,currentFloor,goingUp]);
 
 
   return (
     <div className="App">
       <h2>current floor: {currentFloor}</h2>
       <h2>floors to go: {floorsToGo}</h2>
-      <h2>Select a floor to go:</h2>
-      {floors.map((floor)=>(
-        <button key = {floor} onClick={selectFloor} value ={floor}>{floor}</button>
-      ))}
+      <div>
+        <span>Select a floor to go: </span>
+        {floors.map((floor)=>(
+          <button key = {floor} onClick={selectFloor} value ={floor}>{floor}</button>
+        ))}
+      </div>
+      <br></br>
       <button onClick={(e)=>{setCloseDoor(true)}}>close elevator door</button>
     </div>
   );
