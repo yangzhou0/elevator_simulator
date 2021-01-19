@@ -10,7 +10,6 @@ const addFloor = (currentFloor,floorsToGo,selectedFloor,setFloorsToGo)=>{
   }
   else if (!floorsToGo.includes(selectedFloor)){
     floorsToGo.push(selectedFloor)
-    console.log('new floors to go',floorsToGo)
     setFloorsToGo(floorsToGo)
   }
 }
