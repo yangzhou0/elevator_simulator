@@ -19,8 +19,18 @@ const isGoingUp = (currentFloor,floorsToGo)=>{
   return false
 }
 
+const checkFloorStatus = (currentFloor,floorsToGo)=>{
+  if (currentFloor == floorsToGo[0]){
+    return 'arrived'
+  }
+  else if (floorsToGo.length == 0){
+    return 'stop'
+  }
+}
+
 export {
   getRandomIntInclusive,
   addFloor,
-  isGoingUp
+  isGoingUp,
+  checkFloorStatus
 }

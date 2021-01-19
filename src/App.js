@@ -1,11 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
 import {useEffect,useState} from 'react'
-import {getRandomIntInclusive,addFloor,isGoingUp} from "./helper/utilityFunctions"
+import {getRandomIntInclusive,addFloor,isGoingUp,checkFloorStatus} from "./helper/utilityFunctions"
 
 function App() {
   // initialize a random floow between 1 and 10
-  const [currentFloor,setCurrentFloor] = useState(0)
+  const [currentFloor,setCurrentFloor] = useState(1)
   const [floorsToGo,setFloorsToGo] = useState([])
   const [closeDoor,setCloseDoor] = useState(false)
   const [goingUp,setGoingUp] = useState(true)
@@ -18,6 +18,19 @@ function App() {
   }
 
   useEffect(() => {
+    //check what floor it is on and the corresponding status
+    let floorStatus = checkFloorStatus(currentFloor,floorsToGo)
+    switch (floorStatus) {
+      case 'arrived':
+        console.log(`arrived at ${currentFloor}`);
+        setFloorsToGo(floorsToGo.slice(1))
+        break;
+      case 'stop':
+        console.log('no more floors to go');
+        break;
+    }
+
+    //set time interval for elevator to move
     let interval;
     if (closeDoor){
       isGoingUp(currentFloor,floorsToGo)? setGoingUp(true) : setGoingUp(false)
