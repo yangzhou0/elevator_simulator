@@ -23,8 +23,9 @@ const isGoingUp = (currentFloor,floorsToGo)=>{
   }
 }
 
-const checkFloorStatus = (currentFloor,floorsToGo)=>{
-  if (currentFloor == floorsToGo[0]){
+const checkFloorStatus = (currentFloor,floorsToGo,setFloorsToGo)=>{
+  if (floorsToGo.includes(currentFloor)){
+    setFloorsToGo(floorsToGo.filter(ele=>ele!=currentFloor))
     return 'arrived'
   }
   else if (floorsToGo.length == 0){

@@ -33,10 +33,9 @@ function App() {
     }
 
     //check what floor it is on and the corresponding status
-    let floorStatus = checkFloorStatus(currentFloor,floorsToGo)
+    let floorStatus = checkFloorStatus(currentFloor,floorsToGo,setFloorsToGo)
     switch (floorStatus) {
       case 'arrived':
-        setFloorsToGo(floorsToGo.slice(1))
         setCloseDoor(false)
         let userInput = prompt(`You have arrived at floor ${currentFloor} would you like to go out? y/n`)
         alert('door closing in 3 seconds')
