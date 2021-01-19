@@ -1,5 +1,5 @@
 :exclamation::exclamation::exclamation:
-# You can play with the deployed project on Heroku (here)[https://elevator-20spokes.herokuapp.com/] or follow the instructions below to run it on your local machine. 
+# You can play with the deployed project on Heroku [here](https://elevator-20spokes.herokuapp.com/) or follow the instructions below to run it on your local machine. 
 :exclamation::exclamation::exclamation:
 
 
