@@ -1,3 +1,8 @@
+:exclamation::exclamation::exclamation:
+# You can play with the deployed project on Heroku (here)[https://elevator-20spokes.herokuapp.com/] or follow the instructions below to run it on your local machine. 
+:exclamation::exclamation::exclamation:
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
