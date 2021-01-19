@@ -4,13 +4,18 @@ function getRandomIntInclusive(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
 }
 
-const addFloor = (currentFloor,floorsToGo,selectedFloor,setFloorsToGo)=>{
-  if (currentFloor == selectedFloor){
-    alert(`You are already at floor ${currentFloor}`)
+const addFloor = (currentFloor,floorsToGo,selectedFloor,setFloorsToGo,deselect)=>{
+  if (deselect){
+    console.log('deselect ',selectedFloor)
   }
-  else if (!floorsToGo.includes(selectedFloor)){
-    floorsToGo.push(selectedFloor)
-    setFloorsToGo(floorsToGo)
+  else{
+    if (currentFloor == selectedFloor){
+      alert(`You are already at floor ${currentFloor}`)
+    }
+    else if (!floorsToGo.includes(selectedFloor)){
+      floorsToGo.push(selectedFloor)
+      setFloorsToGo(floorsToGo)
+    }
   }
 }
 

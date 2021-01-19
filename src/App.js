@@ -14,9 +14,9 @@ function App() {
 
   //initialize 10 floors
   const floors = Array(maxFloor).fill(null).map((_, i) => i+1);
-  const selectFloor = (e)=>{
+  const selectFloor = (e,deselect)=>{
     let selectedFloor = Number(e.target.value)
-    addFloor(currentFloor,floorsToGo,selectedFloor,setFloorsToGo)
+    addFloor(currentFloor,floorsToGo,selectedFloor,setFloorsToGo,deselect)
     setMessage(`you selected ${selectedFloor}`)
     setCloseDoor(true)
     console.log('floors to go',floorsToGo)
@@ -62,12 +62,15 @@ function App() {
   return (
     <div className="App">
       <h2>Current floor: {currentFloor}</h2>
-      <h2>Floors to go: {floorsToGo.join(', ')}</h2>
+      <h2>Floors to go:</h2> 
+      {floorsToGo && floorsToGo.map((floorToGo)=>(
+        <button key = {floorToGo} onClick={e=>selectFloor(e,true)} value ={floorToGo}>{floorToGo}</button>
+      ))}
       <h2>Elevator status: {message}</h2>
       <div>
         <span>Select a floor to go: </span>
         {floors.map((floor)=>(
-          <button key = {floor} onClick={selectFloor} value ={floor}>{floor}</button>
+          <button key = {floor} onClick={e => selectFloor(e,false)} value ={floor}>{floor}</button>
         ))}
       </div>
       <br></br>
