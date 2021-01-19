@@ -16,17 +16,12 @@ function App() {
     console.log(floorsToGo)
   }
 
-  // useEffect(() => {
-  //   let elevatorMoving = setTimeout(
-  //     ()=>{setCurrentFloor(goingUp? 
-  //       setCurrentFloor(currentFloor+1) : setCurrentFloor(currentFloor-1))}
-  //       , 1000);
-
-  //   //clean up    
-  //   return () => {
-  //     clearTimeout(elevatorMoving)
-  //   }
-  // }, [closeDoor])
+  useEffect(() => {
+    let elevatorMoving = setInterval(
+      ()=>{setCurrentFloor(goingUp? 
+        (currentFloor+1) : (currentFloor-1))}
+        , 1000);
+  }, [closeDoor])
 
 
   return (
@@ -35,7 +30,7 @@ function App() {
       <h2>floors to go: {floorsToGo}</h2>
       <h2>Select a floor to go:</h2>
       {floors.map((floor)=>(
-        <button onClick={selectFloor} value ={floor}>{floor}</button>
+        <button key = {floor} onClick={selectFloor} value ={floor}>{floor}</button>
       ))}
       <button onClick={(e)=>{setCloseDoor(true)}}>close elevator door</button>
     </div>
