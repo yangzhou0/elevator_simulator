@@ -1,14 +1,15 @@
 import logo from './logo.svg';
 import './App.css';
 import {useEffect,useState} from 'react'
-import {getRandomIntInclusive} from "./helper/utilityFunctions"
+import {getRandomIntInclusive,addFloor} from "./helper/utilityFunctions"
 function App() {
   // initialize a random floow between 1 and 10
   const [currentFloor,setCurrentFloor] = useState(getRandomIntInclusive(1,10))
   const [floorsToGo,setFloorsToGo] = useState([])
   const floors = Array(10).fill(null).map((_, i) => i+1);
   const selectFloor = (e)=>{
-    floorsToGo.push(e.target.value)
+    let selectedFloor = e.target.value
+    addFloor(floorsToGo,selectedFloor)
     console.log(floorsToGo)
     setFloorsToGo(floorsToGo)
   }
