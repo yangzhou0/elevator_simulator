@@ -6,7 +6,8 @@ function getRandomIntInclusive(min, max) {
 
 const addFloor = (currentFloor,floorsToGo,selectedFloor,setFloorsToGo,deselect)=>{
   if (deselect){
-    console.log('deselect ',selectedFloor)
+    let deselectFloor = selectedFloor
+    setFloorsToGo(floorsToGo.filter(ele=>ele!=deselectFloor))
   }
   else{
     if (currentFloor == selectedFloor){

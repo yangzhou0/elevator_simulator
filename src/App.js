@@ -17,7 +17,6 @@ function App() {
   const selectFloor = (e,deselect)=>{
     let selectedFloor = Number(e.target.value)
     addFloor(currentFloor,floorsToGo,selectedFloor,setFloorsToGo,deselect)
-    setMessage(`you selected ${selectedFloor}`)
     setCloseDoor(true)
     console.log('floors to go',floorsToGo)
   }
@@ -40,8 +39,8 @@ function App() {
           let userInput = prompt(`You have arrived at floor ${currentFloor} would you like to go out? y/n`)
           setMessage('door closing in 3 seconds')
           setTimeout(() => {
+            setMessage('door closed')
             setCloseDoor(true)
-            
           }, 3000);
           break;
         case 'stop':
@@ -74,8 +73,8 @@ function App() {
         ))}
       </div>
       <br></br>
-      <button onClick={(e)=>{setCloseDoor(false)}}>open elevator door</button>
-      <button onClick={(e)=>{setCloseDoor(true)}}>close elevator door</button>
+      <button onClick={(e)=>{setMessage('open door'); setCloseDoor(false)}}>open elevator door</button>
+      <button onClick={(e)=>{setMessage('close door'); setCloseDoor(true)}}>close elevator door</button>
     </div>
   );
 }
