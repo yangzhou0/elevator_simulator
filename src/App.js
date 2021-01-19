@@ -5,17 +5,19 @@ import {getRandomIntInclusive,addFloor,isGoingUp,checkFloorStatus} from "./helpe
 
 function App() {
   // initialize a random floow between 1 and 10
-  const [currentFloor,setCurrentFloor] = useState(getRandomIntInclusive(1,10))
+  const maxFloor = 20
+  const [currentFloor,setCurrentFloor] = useState(getRandomIntInclusive(1,maxFloor))
   const [floorsToGo,setFloorsToGo] = useState([])
   const [closeDoor,setCloseDoor] = useState(false)
   const [goingUp,setGoingUp] = useState(true)
   const [message,setMessage] = useState('')
 
   //initialize 10 floors
-  const floors = Array(10).fill(null).map((_, i) => i+1);
+  const floors = Array(maxFloor).fill(null).map((_, i) => i+1);
   const selectFloor = (e)=>{
     let selectedFloor = Number(e.target.value)
     addFloor(currentFloor,floorsToGo,selectedFloor,setFloorsToGo)
+    setMessage(`you selected ${selectedFloor}`)
     setCloseDoor(true)
     console.log('floors to go',floorsToGo)
   }
@@ -54,7 +56,7 @@ function App() {
 
 
     return () => clearInterval(interval);
-  }, [floorsToGo,closeDoor,currentFloor,goingUp]);
+  }, [floorsToGo,closeDoor,currentFloor,goingUp,message]);
 
 
   return (
