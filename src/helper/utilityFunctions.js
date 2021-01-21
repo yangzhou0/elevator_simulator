@@ -20,9 +20,21 @@ const addFloor = (currentFloor,floorsToGo,selectedFloor,setFloorsToGo,deselect)=
 }
 
 const isGoingUp = (currentFloor,floorsToGo)=>{
-  if (floorsToGo[0] > currentFloor){
+
+  // eleator will constantly calculate which floor is the closest and go to that floor
+  let closestFloor = floorsToGo.reduce((accu,curr,i,arr)=>{
+    if (Math.abs(arr[i]-currentFloor) < Math.abs(arr[accu]-currentFloor)){
+      return i
+    }
+    else{
+      return accu
+    }
+  },0) // return the index of the floor in floorsToGo array
+  closestFloor = floorsToGo[closestFloor] // get the closest floor number
+
+  if (closestFloor > currentFloor){
     return true
-  }else if (floorsToGo[0] < currentFloor){
+  }else if (closestFloor < currentFloor){
     return false
   }
 }
