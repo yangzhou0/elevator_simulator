@@ -14,8 +14,7 @@ const addFloor = (currentFloor,floorsToGo,selectedFloor,setFloorsToGo,deselect)=
       alert(`You are already at floor ${currentFloor}`)
     }
     else if (!floorsToGo.includes(selectedFloor)){
-      floorsToGo.push(selectedFloor)
-      setFloorsToGo(floorsToGo)
+      setFloorsToGo(floorsToGo.concat([selectedFloor]))
     }
   }
 }
